@@ -1,0 +1,300 @@
+@charset "ISO-8859-1";
+
+body.home-page {
+	background: #07191c;
+	background-size: cover;
+	font-family: Arial, sans-serif;
+	
+}
+
+/* DISEÑO DE NAVBAR*/
+
+.custom-header {
+    background-color: #000000ee; /* Cambia el color de fondo del header según tu diseño */
+    padding: 18px; /* Ajusta el relleno según sea necesario */
+}
+
+.custom-title {
+    color: #138a9e; /* Cambia el color del texto del h5 según tu diseño */
+    font-size: 30px !important;
+    font-weight: bold !important;
+}
+
+.custom-button {
+    background-color: #20a2b0; /* Cambia el color de fondo del botón según tu diseño */
+    border-color: #20a2b0; /* Cambia el color del borde del botón según tu diseño */
+}
+
+.custom-button:hover {
+    color: #fff; /* Cambia el color del texto del botón en hover según tu diseño */
+    background-color: rgb(107, 217, 228); /* Cambia el color de fondo del botón en hover según tu diseño */
+    border-color: rgb(107, 217, 228); /* Cambia el color del borde del botón en hover según tu diseño */
+}
+
+
+/* Estilos personalizados */
+.shopcart-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Empuja el contenedor a la derecha */
+    margin-right: 20px; /* Ajusta el margen derecho según sea necesario */
+}
+
+.product-count {
+    position: absolute;
+    top: -10px; /* Ajusta según sea necesario */
+    right: -10px; /* Ajusta según sea necesario */
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px; /* Ajusta el tamaño según sea necesario */
+    height: 20px; /* Ajusta el tamaño según sea necesario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px; /* Ajusta el tamaño de la fuente según sea necesario */
+}
+
+.svg-icon-link {
+    position: relative;
+}
+
+.notification-container {
+    position: relative;
+    display: inline-block;
+    margin-left: auto; /* Empuja el contenedor a la derecha */
+    margin-right: -52%;
+}
+
+.notification-link {
+    position: relative;
+}
+
+.notification-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-link svg {
+    width: 40px;
+    height: 40px;
+}
+
+.image-container {
+	width: 95%;
+}
+
+.image-container img {
+	max-width: 18%; /* Reduce el valor a 25% o el tamaño que prefieras */
+	border-radius: 10px;
+}
+
+.navbar-custom {
+    background-color: #0d5966 !important; /* Color verde personalizado */
+}
+
+.user-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000000ee; /* Ajusta el color de fondo según tu diseño */
+    padding: 25px; /* Ajusta el relleno según sea necesario */
+}
+
+
+.offcanvas-body-custom{
+    background-color: #012f38 !important;
+}
+
+
+
+.fondo-custom{
+	background: #07191c !important;
+}
+
+
+.letra{
+	color: white !important;
+	font-weight: bold !important;
+	font-size: 16px !important;
+}
+
+.letra2{
+	color: #138a9e !important;
+	font-weight: bold !important;
+	font-size: 22px !important;
+}
+
+
+
+.input {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 350px;
+  background-color: #07191c !important;
+  justify-content: center !important;
+  border-radius: 0px !important;
+  transition: 1s !important;
+  padding: 10px !important;
+  overflow: hidden !important;
+}
+
+.value {
+  font-size: 14px !important;
+  font-weight: bold !important;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 10px !important;
+  color: white!important;
+  display: flex !important;
+  position: relative !important;
+  gap: 5px !important;
+  cursor: pointer !important;
+  border-radius: 10px !important;
+  transition: 1s !important;
+  box-sizing: border-box !important;
+}
+
+.value:not(:active):hover,
+.value:focus {
+  display: flex !important;
+  box-sizing: border-box !important;
+  border: 2px solid #1a1f24!important;
+  color: #637185 !important;
+}
+
+.value:focus,
+.value:active {
+  background-color: #1a1f24 !important;
+  outline: none !important;
+  margin-left: 17px !important;
+}
+
+.value::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 5px !important;
+  left: -15px !important;
+  width: 5px !important;
+  height: 80% !important;
+  background-color: #2f81f7 !important;
+  border-radius: 5px !important;
+  opacity: 0 !important;
+  transition: 1s !important;
+}
+
+.value:focus::before,
+.value:active::before {
+  opacity: 1 !important;
+}
+
+
+.input:hover > :not(.value:hover) {
+  transition: 300ms !important;
+  filter: blur(1.5px)!important;
+  transform: scale(0.95, 0.95)!important;
+}
+
+
+/* CODIGO DE CATEGORIAS */
+
+/* Estilos para las imágenes dentro de .box */
+.box img {
+    width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+    height: 100%; /* Ajusta la altura de la imagen al 100% del contenedor */
+    object-fit: cover; /* Ajusta la imagen para cubrir el contenedor */
+}
+
+/* Otros estilos para .container y .box */
+.container {
+    position: relative; 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 1em;
+    width: 1000px;
+    height: 500px;
+    transition: all 400ms;
+    margin: 170px auto 0; /* Centra el contenedor horizontalmente y agrega un margen superior */
+}
+
+.container:hover .box {
+    filter: grayscale(100%) opacity(24%);
+}
+
+.box {
+    position: relative;
+    background: var(--img) center center; 
+    background-size: cover;
+    transition: all 400ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none; /* Elimina subrayado del enlace */
+    color: inherit; /* Hereda el color del texto */
+}
+
+.container .box:hover {
+    filter: grayscale(0%) opacity(100%);
+}
+
+.container:has(.box-1:hover) {
+    grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+}
+
+.container:has(.box-2:hover) {
+    grid-template-columns: 1fr 3fr 1fr 1fr 1fr;
+}
+
+.container:has(.box-3:hover) {
+    grid-template-columns: 1fr 1fr 3fr 1fr 1fr;
+}
+
+.container:has(.box-4:hover) {
+    grid-template-columns: 1fr 1fr 1fr 3fr 1fr;
+}
+
+.container:has(.box-5:hover) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 3fr;
+}
+
+.box:nth-child(odd) {
+    transform: translateY(-16px);
+}
+
+.box:nth-child(even) {
+    transform: translateY(16px);
+}
+
+.box::after {
+    content: attr(data-text);
+    position: absolute;
+    bottom: 20px;
+    background: #000;
+    color: #fff;
+    padding: 10px 10px 10px 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    transform: translateY(60px);
+    opacity: 0;
+    transition: all 400ms;
+}
+
+.box:hover::after {
+    transform: translateY();
+    opacity: 1;
+    transition-delay: 400ms;
+}
+
+

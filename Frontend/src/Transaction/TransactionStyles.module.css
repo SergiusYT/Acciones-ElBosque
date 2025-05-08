@@ -1,0 +1,187 @@
+body.transaction {
+  background-color: #07191c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+.container {
+  display: flex;
+  gap: 2rem;
+}
+
+
+.container h1{
+  position: relative;
+  text-align: center;
+  color: antiquewhite;
+  top: -50px;
+  width: 100%;
+  font-weight: bold !important; /* Cambia el grosor de la fuente */
+}
+
+.card {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: #138a9e;
+  box-shadow: 0 0 20px rgba(218, 218, 218, 0.5);
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+    flex: 1;
+
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 4px solid rgb(0, 128, 128);
+  border-radius: 8px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group.col-md-6 {
+  flex: 0 0 48%;
+}
+
+.btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #218838;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-lg {
+  font-size: 1.25rem;
+  padding: 0.75rem;
+}
+
+/* DISEÑO DE MEDIOS DE PAGO*/
+
+/* Container Styles */
+.payment-container {
+  width: 320px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #f1f5f9; /* slate-50 */
+}
+
+/* Text Styles */
+.payment-method-title {
+  text-transform: capitalize;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+.payment-description {
+  font-size: 10px;
+  align-self: flex-start;
+  color: #6b7280; /* gray-500 */
+  padding-bottom: 0.25rem;
+}
+
+.payment-description span {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Label Styles */
+.payment-label {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  z-index: 10;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.5s;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-label:hover {
+  background-color: #d3e1e3; /* slate-200 */
+}
+
+.payment-label.checked {
+  background-color: #138a9e; /* indigo-500 */
+  border-color: #136370; /* indigo-500 */
+  opacity: 90%;
+}
+
+.payment-label.checked .payment-icon svg {
+  fill: #fff; /* white */
+}
+
+.payment-label.checked p {
+  color: #fff; /* white */
+}
+
+.payment-label .payment-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.payment-label p {
+  font-weight: 600;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  white-space: nowrap;
+  top: 0.25rem;
+  left: 3rem;
+  transition: all 0.7s;
+  opacity: 0;
+}
+
+.payment-label.checked p {
+  transform: translateY(0);
+  transition: all 0.5s;
+  opacity: 1;
+}
+
+
+

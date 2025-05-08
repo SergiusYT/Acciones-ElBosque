@@ -1,0 +1,345 @@
+@charset "ISO-8859-1";
+
+body.home-page {
+	background: #07191c;
+	background-size: cover;
+	font-family: Arial, sans-serif;
+	
+}
+
+/* DISEÑO DE NAVBAR*/
+
+.custom-header {
+    background-color: #000000ee; /* Cambia el color de fondo del header según tu diseño */
+    padding: 18px; /* Ajusta el relleno según sea necesario */
+}
+
+.custom-title {
+    color: #138a9e; /* Cambia el color del texto del h5 según tu diseño */
+    font-size: 30px !important;
+    font-weight: bold !important;
+}
+
+.custom-button {
+    background-color: #20a2b0; /* Cambia el color de fondo del botón según tu diseño */
+    border-color: #20a2b0; /* Cambia el color del borde del botón según tu diseño */
+}
+
+.custom-button:hover {
+    color: #fff; /* Cambia el color del texto del botón en hover según tu diseño */
+    background-color: rgb(107, 217, 228); /* Cambia el color de fondo del botón en hover según tu diseño */
+    border-color: rgb(107, 217, 228); /* Cambia el color del borde del botón en hover según tu diseño */
+}
+
+
+/* Estilos personalizados */
+.shopcart-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Empuja el contenedor a la derecha */
+    margin-right: 20px; /* Ajusta el margen derecho según sea necesario */
+}
+
+.product-count {
+    position: absolute;
+    top: -10px; /* Ajusta según sea necesario */
+    right: -10px; /* Ajusta según sea necesario */
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 20px; /* Ajusta el tamaño según sea necesario */
+    height: 20px; /* Ajusta el tamaño según sea necesario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px; /* Ajusta el tamaño de la fuente según sea necesario */
+}
+
+.svg-icon-link {
+    position: relative;
+}
+
+.notification-container {
+    position: relative;
+    display: inline-block;
+    margin-left: auto; /* Empuja el contenedor a la derecha */
+    margin-right: -52%;
+}
+
+.notification-link {
+    position: relative;
+}
+
+.notification-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-link svg {
+    width: 40px;
+    height: 40px;
+}
+
+.image-container {
+	width: 95%;
+}
+
+.image-container img {
+	max-width: 18%; /* Reduce el valor a 25% o el tamaño que prefieras */
+	border-radius: 10px;
+}
+
+.navbar-custom {
+    background-color: #0d5966 !important; /* Color verde personalizado */
+}
+
+.user-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000000ee; /* Ajusta el color de fondo según tu diseño */
+    padding: 25px; /* Ajusta el relleno según sea necesario */
+}
+
+
+.offcanvas-body-custom{
+    background-color: #012f38 !important;
+}
+
+
+
+.fondo-custom{
+	background: #07191c !important;
+}
+
+
+.letra{
+	color: white !important;
+	font-weight: bold !important;
+	font-size: 16px !important;
+}
+
+.letra2{
+	color: #138a9e !important;
+	font-weight: bold !important;
+	font-size: 22px !important;
+}
+
+
+
+.input {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 350px;
+  background-color: #07191c !important;
+  justify-content: center !important;
+  border-radius: 0px !important;
+  transition: 1s !important;
+  padding: 10px !important;
+  overflow: hidden !important;
+}
+
+.value {
+  font-size: 14px !important;
+  font-weight: bold !important;
+  background-color: transparent !important;
+  border: none !important;
+  padding: 10px !important;
+  color: white!important;
+  display: flex !important;
+  position: relative !important;
+  gap: 5px !important;
+  cursor: pointer !important;
+  border-radius: 10px !important;
+  transition: 1s !important;
+  box-sizing: border-box !important;
+}
+
+.value:not(:active):hover,
+.value:focus {
+  display: flex !important;
+  box-sizing: border-box !important;
+  border: 2px solid #1a1f24!important;
+  color: #637185 !important;
+}
+
+.value:focus,
+.value:active {
+  background-color: #1a1f24 !important;
+  outline: none !important;
+  margin-left: 17px !important;
+}
+
+.value::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 5px !important;
+  left: -15px !important;
+  width: 5px !important;
+  height: 80% !important;
+  background-color: #2f81f7 !important;
+  border-radius: 5px !important;
+  opacity: 0 !important;
+  transition: 1s !important;
+}
+
+.value:focus::before,
+.value:active::before {
+  opacity: 1 !important;
+}
+
+
+.input:hover > :not(.value:hover) {
+  transition: 300ms !important;
+  filter: blur(1.5px)!important;
+  transform: scale(0.95, 0.95)!important;
+}
+
+/* DISEÑO CARRITO DE COMPRAS*/
+
+.shopping-cart{
+	padding-bottom: 50px;
+	font-family: 'Montserrat', sans-serif;
+	color: #fff;
+}
+
+.shopping-cart.dark{
+	background-color: #07191c;
+}
+
+.shopping-cart .content{
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+	background-color: #0d5966;
+}
+
+.shopping-cart .block-heading{
+    padding-top: 150px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.shopping-cart .block-heading p{
+	text-align: center;
+	max-width: 420px;
+	margin: auto;
+	opacity:0.7;
+}
+
+.shopping-cart .dark .block-heading p{
+	opacity:0.8;
+}
+
+.shopping-cart .block-heading h1,
+.shopping-cart .block-heading h2,
+.shopping-cart .block-heading h3 {
+	margin-bottom:1.2rem;
+	color: #3b99e0;
+}
+
+.shopping-cart .items{
+	margin: auto;
+}
+
+.shopping-cart .items .product{
+	margin-bottom: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.shopping-cart .items .product .info{
+    display: flex; /* Asegúrate de que los elementos hijos estén en la misma línea */
+    justify-content: space-between; /* Espacia los elementos de manera uniforme */
+    align-items: center; /* Alinea los elementos verticalmente al centro */
+    padding-top: 0px;
+    text-align: center;
+}
+
+.shopping-cart .items .product .info .product-name{
+	font-weight: 600;
+	font-size: 20px;
+	flex: 1; /* Permite que la información del producto tome el espacio disponible */
+}
+
+.shopping-cart .items .product .info .product-name a{
+	color: #fff;
+	text-decoration: none;
+}
+
+
+.shopping-cart .items .product .info .product-name .product-info{
+	font-size: 14px;
+	margin-top: 15px;
+}
+
+.shopping-cart .items .product .info .product-name .product-info .value{
+	font-weight: 400;
+}
+
+.shopping-cart .items .product .info .quantity {
+    flex: 0 0 auto; /* Evita que la cantidad se expanda más allá de su contenido */
+    margin: auto ;
+}
+
+
+.shopping-cart .items .product .info .quantity .quantity-input{
+    margin: auto;
+    width: 100px;
+}
+
+.shopping-cart .items .product .info .price{
+    font-weight: bold;
+    font-size: 35px;
+    flex: 0 0 auto; /* Evita que el precio se expanda más allá de su contenido */
+    text-align: right; /* Asegura que el precio esté alineado a la derecha */
+    margin-top: auto; /* Ajusta el margen superior para alinear mejor el texto */
+    margin-bottom: auto; /* Ajusta el margen inferior para alinear mejor el texto */
+ }
+
+.shopping-cart .summary{
+	border-top: 2px solid #5ea4f3;
+    background-color: #1f8ea1;
+    height: 100%;
+    padding: 30px;
+}
+
+.shopping-cart .summary h3{
+	text-align: center;
+	font-size: 1.3em;
+	font-weight: 600;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.shopping-cart .summary .summary-item:not(:last-of-type){
+	padding-bottom: 10px;
+	padding-top: 10px;
+	border-bottom: 4px solid rgba(0, 0, 0, 0.1);
+}
+
+.shopping-cart .summary .text{
+	font-size: 1em;
+	font-weight: 600;
+}
+
+.shopping-cart .summary .price{
+	font-size: 1em;
+	float: right;
+}
+
+.shopping-cart .summary button{
+	margin-top: 20px;
+}
+
+
