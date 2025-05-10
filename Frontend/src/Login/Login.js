@@ -8,6 +8,7 @@ const Login = () => {
   const [login, setLogin] = useState('');
   const [clave, setClave] = useState('');
   const submitRef = useRef(null);
+  
 
   useEffect(() => {
     // Agregar la clase al body al montar el componente
@@ -78,6 +79,18 @@ const Login = () => {
 
   return (
     <div>
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className={styles["background-video"]}
+      >
+        <source src="/video/fondoLogin.mp4" type="video/mp4" />
+      </video>
+
+      <div className={styles["background-blur"]}></div>
+
       <div className={styles["image-container"]}>
         <img src="/img/logo.png" alt="Imagen de cabecera" />
       </div>

@@ -2,26 +2,64 @@
 
 
 body.login-page {
-	background: #0d5966 url('/img/fondoLogin.jpg') no-repeat center center fixed;
-	background-size: cover;
 	font-family: Arial, sans-serif;
-	
 }
+
+
+.background-video {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -100;
+	object-fit: cover;
+	transform: scale(1); /* Usa 0.95 o 0.9 si se ve demasiado ampliado */
+	pointer-events: none;
+}
+
+.background-blur {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -99; /* Un nivel por encima del video */
+	backdrop-filter: blur(3px);
+	background-color: rgba(0, 0, 0, 0.2); /* Oscurece un poco */
+}
+
+  
 
 .image-container {
 	position: relative;
 	width: 100%;
 	text-align: center;
-	margin-bottom: 20px; /* Ajusta el espacio entre la imagen y el formulario */
-	z-index: 2; /* Asegura que la imagen esté delante del formulario */
+	margin-bottom: 20px;
+	z-index: 1;
+}
+
+.image-container::before {
+	content: "";
+	position: absolute;
+	top: 100px;
+	left: 49.5%;
+	transform: translateX(-50%);
+	width: 200px;
+	height: 150px;
+	background: rgba(0, 0, 0, 0.4); /* Fondo translúcido oscuro */
+	border-radius: 15px;
+	z-index: -1; /* Detrás del logo */
+	filter: blur(2px); /* Suaviza el fondo */
 }
 
 .image-container img {
-	max-width: 10%; /* Reduce el valor a 25% o el tamaño que prefieras */
+	max-width: 17%; /* Reduce el valor a 25% o el tamaño que prefieras */
 	height: auto;
 	border-radius: 10px;
 	position: relative;
-	top: 100px; /* Mueve la imagen hacia arriba */
+	top: 40px; /* Mueve la imagen hacia arriba */
+	filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.6));
 }
 
 .login-box {
@@ -35,6 +73,7 @@ body.login-page {
 	box-sizing: border-box;
 	box-shadow: 0 15px 25px rgba(0,0,0,.6);
 	border-radius: 10px;
+	opacity: 0.9;
 }
 
 .login-box .user-box {
@@ -45,10 +84,10 @@ body.login-page {
 	width: 100%;
 	padding: 10px 0;
 	font-size: 16px;
-	color: #fff;
+	color: #85ce99;
 	margin-bottom: 30px;
 	border: none;
-	border-bottom: 1px solid #fff;
+	border-bottom: 1px solid #85ce99;
 	outline: none;
 	background: transparent;
 }
@@ -94,13 +133,13 @@ body.login-page {
 }
 
 .login-box a:hover {
-	background: #0d5966;
-	color: #fff;
+	background: #fa6700;
+	color: #488558;
 	border-radius: 5px;
-	box-shadow: 0 0 5px #0d5966,
-				0 0 25px #0d5966,
-				0 0 50px #0d5966,
-				0 0 100px #0d5966;
+	box-shadow: 0 0 5px #fa6700,
+				0 0 25px #fa6700,
+				0 0 50px #fa6700,
+				0 0 100px #fa6700;
 }
 
 .login-box a span {
@@ -123,6 +162,6 @@ body.login-page {
 	left: -100%;
 	width: 100%;
 	height: 2px;
-	background: linear-gradient(90deg, transparent, #128599);
+	background: linear-gradient(90deg, transparent, #fa6700);
 	animation: btn-anim1 2s linear infinite;
 }
