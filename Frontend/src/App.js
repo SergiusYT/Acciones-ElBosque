@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Login/Login';
-import Register from './Register/Register';
-import HomePage from './Homepage/HomePage';
-import Category from './Category/Category';
-import Product from './Category/Product/Computing';
+import Login from './Login/Login.jsx';
+import Register from './Register/Register.jsx';
+import HomePage from './Homepage/HomePage.jsx';
+import Category from './Category/Category.jsx';
+import Product from './Category/Product/Computing.jsx';
 
-import ShopCart from './ShopCart/ShopCart';
+import ShopCart from './ShopCart/ShopCart.jsx';
 
-import Transaction from './Transaction/Transaction';
+import Transaction from './Transaction/Transaction.jsx';
 
 function App() {
   return (
