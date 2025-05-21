@@ -1,53 +1,26 @@
+// components/Header.js
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import styles from './CategoryStyles.module.css';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
+import styles from './Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-// Agrega los iconos que necesites a la biblioteca
-library.add(faBarsStaggered);
-
-const Category = () => {
+const Header = () => {
     const [usuarioNombre, setUsuarioNombre] = useState('');
+    const [productCount, setProductCount] = useState(0);
+    const [notificationCount, setNotificationCount] = useState(0);
 
     useEffect(() => {
-        // Recuperar el nombre del usuario desde localStorage
         const nombre = localStorage.getItem('usuarioNombre');
         if (nombre) {
             setUsuarioNombre(nombre);
         }
-
-        // Agregar la clase al body al montar el componente
-        document.body.classList.add(styles["home-page"]);
-
-        // Remover la clase al body al desmontar el componente
-        return () => {
-            document.body.classList.remove(styles["home-page"]);
-        };
     }, []);
-    
-    //CARRITO 
-    
-    // Estado para el contador de productos
-    // eslint-disable-next-line no-unused-vars
-    const [productCount, setProductCount] = useState(0);
 
-    // Lógica para mostrar el número de productos o "+9"
     const displayCount = productCount > 9 ? '+9' : productCount;
-
-	// Estado para el contador de notificaciones
-	// eslint-disable-next-line no-unused-vars
-    const [notificationCount, setNotificationCount] = useState(0); 
-
-      // Lógica para mostrar el número de notificaciones o "+9"
     const displayNotificationCount = notificationCount > 9 ? '+9' : notificationCount;
-  
-    return (
-        <div>
-                                {/*Encabezado*/}
 
+    return (
             <nav className={`navbar bg-body-tertiary fixed-top ${styles["navbar-custom"]}`}>
                 <div className="container-fluid">
                     <a className="navbar-brand" href="/homepage">
@@ -95,15 +68,15 @@ const Category = () => {
                         id="offcanvasNavbar"
                         aria-labelledby="offcanvasNavbarLabel"
                     >
-					<div className={`offcanvas-header ${styles["custom-header"]}`}>
-    					<h5 className={`offcanvas-title ${styles["custom-title"]}`} id="offcanvasNavbarLabel">Menú</h5>
-    					<button
-        					type="button"
-       						className={`btn-close ${styles["custom-button"]}`}
-        					data-bs-dismiss="offcanvas"
-        					aria-label="Close"
-    					></button>
-					</div>
+                    <div className={`offcanvas-header ${styles["custom-header"]}`}>
+                        <h5 className={`offcanvas-title ${styles["custom-title"]}`} id="offcanvasNavbarLabel">Menú</h5>
+                        <button
+                            type="button"
+                            className={`btn-close ${styles["custom-button"]}`}
+                            data-bs-dismiss="offcanvas"
+                            aria-label="Close"
+                        ></button>
+                    </div>
 
                         <div className={`offcanvas-body ${styles["offcanvas-body-custom"]}`}>
                             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -120,25 +93,25 @@ const Category = () => {
                                     >
                                         Categorias
                                     </a>
-								<ul className={`dropdown-menu ${styles["fondo-custom"]}`}>
-    								<div className={`${styles.input}`}>
-        								<a href="/category/computing" className={`${styles.value}`}>
-            								Computación
-        								</a>
-        								<a href="/category/smarthphone" className={`${styles.value}`}>
-            								Celulares
-        								</a>
-        								<a href="/category/zona-gamer" className={`${styles.value}`}>
-            								Zona Gamer
-        								</a>
-        								<a href="/category/audio" className={`${styles.value}`}>
-            								Audio
-        								</a>
-        								<a href="/category/smart-home" className={`${styles.value}`}>
-            								Smart Home
-        								</a>
-    								</div>
-								</ul>
+                                <ul className={`dropdown-menu ${styles["fondo-custom"]}`}>
+                                    <div className={`${styles.input}`}>
+                                        <a href="/category/computing" className={`${styles.value}`}>
+                                            Computación
+                                        </a>
+                                        <a href="/category/smarthphone" className={`${styles.value}`}>
+                                            Celulares
+                                        </a>
+                                        <a href="/category/zona-gamer" className={`${styles.value}`}>
+                                            Zona Gamer
+                                        </a>
+                                        <a href="/category/audio" className={`${styles.value}`}>
+                                            Audio
+                                        </a>
+                                        <a href="/category/smart-home" className={`${styles.value}`}>
+                                            Smart Home
+                                        </a>
+                                    </div>
+                                </ul>
                                 </li>
                                 <li className="nav-item">
                                     <a className={`nav-link active ${styles["letra"]}`} aria-current="page" href="/record">Historial</a>
@@ -154,42 +127,21 @@ const Category = () => {
                                 <input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" />
                                 <button className="btn btn-outline-success" type="submit">Buscar</button>
                             </form>
-							<ul>
-    							<li className={`nav-item ${styles["user-container"]}`}>
-        							<a className={`nav-link ${styles["letra2"]}`} href="/perfil" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            						<span>{usuarioNombre}</span>
-            						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style={{ color: "#138a9e", width: "30px", height: "30px" }}>
-                						<path fill="#138a9e" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
-            						</svg>
-        							</a>
-    							</li>
-							</ul>
+                            <ul>
+                                <li className={`nav-item ${styles["user-container"]}`}>
+                                    <a className={`nav-link ${styles["letra2"]}`} href="/perfil" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                                    <span>{usuarioNombre}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style={{ color: "#138a9e", width: "30px", height: "30px" }}>
+                                        <path fill="#138a9e" d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/>
+                                    </svg>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </nav>
-            
-            {/* Contenido principal */}
-            <div className={styles.container}>
-                <a href="/category/computing" className={`${styles.box} ${styles["box-1"]}`} data-text="Computación">
-                    <img src="/img/computador.jpg" alt="Computación"/>
-                </a>
-                <a href="/category/smarthphone" className={`${styles.box} ${styles["box-2"]}`} data-text="Celulares">
-                    <img src="/img/celular.jpg" alt="Celulares"/>
-                </a>
-                <a href="/category/zona-gamer" className={`${styles.box} ${styles["box-3"]}`} data-text="Zona Gamer">
-                    <img src="/img/gamer.jpg" alt="Zona Gamer"/>
-                </a>
-                <a href="/category/audio" className={`${styles.box} ${styles["box-4"]}`} data-text="Audio">
-                    <img src="/img/audio.jpg" alt="Audio"/>
-                </a>
-                <a href="/category/smart-home" className={`${styles.box} ${styles["box-5"]}`} data-text="Smart Home">
-                    <img src="/img/smart.jpg" alt="Smart Home"/>
-                </a>
-            </div>
+    );
+};
 
-         </div>   
-         );
-	};
-
-export default Category;    
+export default Header;
