@@ -4,6 +4,7 @@ import Login from './Login/Login.jsx';
 import Register from './Register/Register.jsx';
 import HomePage from './Homepage/HomePage.jsx';
 import Category from './Category/Category.jsx';
+import Dashboard from './Category/Dashboard/Dashboard.jsx';
 import Product from './Category/Product/Computing.jsx';
 
 import ShopCart from './ShopCart/ShopCart.jsx';
@@ -18,6 +19,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/homepage" element={<HomePage />} />
         <Route path="/category" element={<Category />} />
+        <Route path="/category/dashboard" element={<Dashboard />} />
         <Route path="/category/computing" element={<Product />} />
         <Route path="/shopcart" element={<ShopCart />} />
         <Route path="/transaction" element={<Transaction />} />

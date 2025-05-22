@@ -59,7 +59,7 @@ const Category = () => {
                 <a href="/category/computing" className={`${styles.box} ${styles["box-1"]}`} data-text="Computación">
                     <img src="/img/computador.jpg" alt="Computación"/>
                 </a>
-                <a href="/category/smarthphone" className={`${styles.box} ${styles["box-2"]}`} data-text="Celulares">
+                <a href="/category/dashboard" className={`${styles.box} ${styles["box-2"]}`} data-text="Dashboard">
                     <img src="/img/celular.jpg" alt="Celulares"/>
                 </a>
                 <a href="/category/zona-gamer" className={`${styles.box} ${styles["box-3"]}`} data-text="Zona Gamer">
