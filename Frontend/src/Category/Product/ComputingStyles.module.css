@@ -155,3 +155,25 @@ body.home-page {
 	color: #0d5966;
 	margin-left: 10px; /* Mueve el enlace a la derecha */
 }
+
+
+/* DISEÑO DEL MODELO 3D*/
+
+.splineContainer {
+    width: 100%;
+    padding: 2rem 0;
+    background: linear-gradient(to bottom, #0f2027, #488558, #569d69); /* Fondo bonito */
+    display: flex;
+    justify-content: left;
+    margin-top: 80px;
+    padding-left: 2rem;
+}
+
+.splineWrapper {
+    width: 100%;
+    max-width: 800px;
+    height: 550px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}

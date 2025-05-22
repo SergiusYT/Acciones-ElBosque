@@ -32,7 +32,7 @@
     display: flex;
     align-items: center;
     margin-left: auto; /* Empuja el contenedor a la derecha */
-    margin-right: 20px; /* Ajusta el margen derecho según sea necesario */
+    margin-right: 150px; /* Ajusta el margen derecho según sea necesario */
 }
 
 .product-count {
@@ -90,12 +90,12 @@
 }
 
 .image-container img {
-	max-width: 18%; /* Reduce el valor a 25% o el tamaño que prefieras */
+	max-width: 38%; /* Reduce el valor a 25% o el tamaño que prefieras */
 	border-radius: 10px;
 }
 
 .navbar-custom {
-    background-color: #0d5966 !important; /* Color verde personalizado */
+    background-color: #0a0a0ab6 !important; /* Color verde personalizado */
 }
 
 .user-container {

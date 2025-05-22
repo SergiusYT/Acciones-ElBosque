@@ -1,7 +1,6 @@
 @charset "ISO-8859-1";
 
 body.register-page {
-	background: #0d5966 url('/img/fondoRegistro.jpg') no-repeat center center fixed;
 	background-size: cover;
 	font-family: Arial, sans-serif;
 }

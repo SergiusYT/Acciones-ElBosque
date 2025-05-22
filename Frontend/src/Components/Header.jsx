@@ -7,8 +7,49 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Header = () => {
     const [usuarioNombre, setUsuarioNombre] = useState('');
-    const [productCount, setProductCount] = useState(0);
-    const [notificationCount, setNotificationCount] = useState(0);
+
+
+
+        const adminMenuItems = [
+        "Dashboard",
+        "Usuarios",
+        "Configuración",
+        "Roles y Permisos",
+        "Contenido",
+        "Apariencia",
+        "Backups",
+        "Perfil",
+        "Cerrar sesión"
+        ];
+
+
+        const commissionMenuItems = [
+        "Home",
+        "Mis Inversionistas",
+        "Portafolio",
+        "Lista de deseo",
+        "Billetera",
+        "Detalle de pago",
+        "Retiro",
+        "Perfil",
+        "Cerrar sesión"
+        ];
+
+
+        const investorMenuItems = [
+        "Home",
+        "Portafolio",
+        "Lista de deseo",
+        "Billetera",
+        "Detalle de pago",
+        "Retiro",
+        "Perfil",
+        "Cerrar sesión"
+        ];
+
+
+
+
 
     useEffect(() => {
         const nombre = localStorage.getItem('usuarioNombre');
@@ -17,7 +58,20 @@ const Header = () => {
         }
     }, []);
 
+    //CARRITO 
+    
+    // Estado para el contador de productos
+    // eslint-disable-next-line no-unused-vars
+    const [productCount, setProductCount] = useState(0);
+
+    // Lógica para mostrar el número de productos o "+9"
     const displayCount = productCount > 9 ? '+9' : productCount;
+
+    // Estado para el contador de notificaciones
+    // eslint-disable-next-line no-unused-vars
+    const [notificationCount, setNotificationCount] = useState(0); 
+
+      // Lógica para mostrar el número de notificaciones o "+9"
     const displayNotificationCount = notificationCount > 9 ? '+9' : notificationCount;
 
     return (
@@ -25,7 +79,7 @@ const Header = () => {
                 <div className="container-fluid">
                     <a className="navbar-brand" href="/homepage">
                         <div className={styles["image-container"]}>
-                            <img src="/img/logo.png" alt="Imagen de cabecera" />
+                            <img src="/img/Logo2.png" alt="Imagen de cabecera" />
                         </div>
                     </a>
                     

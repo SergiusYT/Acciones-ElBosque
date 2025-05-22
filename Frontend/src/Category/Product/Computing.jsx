@@ -7,7 +7,7 @@ import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
 
 import Header from '../../Components/Header';
 
-
+import Spline from '@splinetool/react-spline';
 // Agrega los iconos que necesites a la biblioteca
 library.add(faBarsStaggered);
 
@@ -30,6 +30,15 @@ const Product = () => {
         };
     }, []);
     
+
+        const [showSpline, setShowSpline] = useState(false);
+    
+        useEffect(() => {
+            const timeout = setTimeout(() => {
+                setShowSpline(true);
+            }, 1000); // 1 segundo de espera
+            return () => clearTimeout(timeout);
+        }, []);
     //CARRITO 
     
     // Estado para el contador de productos
@@ -79,6 +88,7 @@ const Product = () => {
                         </div>
                     </div>
                 ))}
+        
       		{products.map((product, index) => (
                     <div key={index} className={styles.card}>
                         <div className={styles.imgBx}>
@@ -111,7 +121,15 @@ const Product = () => {
                         </div>
                     </div>
                 ))}
-		   </div>	
+		   </div>
+
+                                   {showSpline && (
+                           <section className={styles.splineContainer}>
+                               <div className={styles.splineWrapper}>
+                                   <Spline scene="https://draft.spline.design/4RgHBiZ0f8PdJQZI/scene.splinecode" />
+                               </div>
+                           </section>
+                       )}	
          </div>   
          );
 	};

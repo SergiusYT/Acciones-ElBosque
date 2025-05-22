@@ -5,15 +5,19 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import styles from './HomePageStyles.module.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Header from '../Components/Header';
+
+import Spline from '@splinetool/react-spline';
 
 // Agrega los iconos que necesites a la biblioteca
 library.add(faBarsStaggered);
 
 const HomePage = () => {
     const [usuarioNombre, setUsuarioNombre] = useState('');
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const videoRefs = [React.createRef(), React.createRef(), React.createRef(), React.createRef(), React.createRef()];
+
 
     useEffect(() => {
         // Recuperar el nombre del usuario desde localStorage
@@ -31,62 +35,66 @@ const HomePage = () => {
         };
     }, []);
     
-    //CARRITO 
-    
-    // Estado para el contador de productos
-    // eslint-disable-next-line no-unused-vars
-    const [productCount, setProductCount] = useState(0);
+    useEffect(() => {
+        const currentVideo = videoRefs[currentIndex].current;
 
-    // Lógica para mostrar el número de productos o "+9"
-    const displayCount = productCount > 9 ? '+9' : productCount;
+        if (currentVideo) {
+            currentVideo.play();
+            const handleEnded = () => {
+                const nextIndex = (currentIndex + 1) % videoRefs.length;
+                setCurrentIndex(nextIndex);
+            };
 
-	// Estado para el contador de notificaciones
-	// eslint-disable-next-line no-unused-vars
-    const [notificationCount, setNotificationCount] = useState(0); 
+            currentVideo.addEventListener('ended', handleEnded);
 
-      // Lógica para mostrar el número de notificaciones o "+9"
-    const displayNotificationCount = notificationCount > 9 ? '+9' : notificationCount;
+            return () => {
+                currentVideo.removeEventListener('ended', handleEnded);
+            };
+        }
+    }, [currentIndex]);
+
+
+    const [showSpline, setShowSpline] = useState(false);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setShowSpline(true);
+        }, 1000); // 1 segundo de espera
+        return () => clearTimeout(timeout);
+    }, []);
+
+
   
     return (
         <div>
                                 {/*Encabezado*/}
                 <Header />
 
-            {/* Carrusel de Bootstrap */}
-            <div id="carouselExampleDark" className={`carousel carousel-dark slide ${styles.carousel}`} data-bs-ride="carousel">
-                <div className="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-                <div className="carousel-inner">
-                    <div className="carousel-item active" data-bs-interval="8000">
-                        <img src="/img/carousel1.png" className={`d-block w-100 ${styles['carousel-img']}`} alt="..." />
-                        <div className="carousel-caption d-none d-md-block">
-        					<h5 className={styles['carousel-caption-title']}>Bienvenido {usuarioNombre}</h5>
-        					<p className={styles['carousel-caption-text']}>¿Que haremos hoy?</p>
-                        </div>
-                    </div>
-                    <div className="carousel-item" data-bs-interval="4000">
-                        <img src="/img/carousel2.png" className={`d-block w-100 ${styles['carousel-img']}`} alt="..." />
-                        <div className="carousel-caption d-none d-md-block">
-                        </div>
-                    </div>
-                    <div className="carousel-item" data-bs-interval="4000">
-                        <img src="/img/carousel3.png" className={`d-block w-100 ${styles['carousel-img']}`} alt="..." />
-                        <div className="carousel-caption d-none d-md-block">
-                        </div>
+            {/* Carrusel */}
+                <div className={`carousel-inner ${styles.carouselContainer}`}>
+
+
+                {[0, 1, 2, 3, 4].map((index) => (
+                <div className={`carousel-item ${index === currentIndex ? 'active' : ''}`} key={index}>
+                    <video
+                    ref={videoRefs[index]}
+                    className={`d-block w-100 ${styles['carousel-img']}`}
+                    controls={false}
+                    muted
+                    playsInline
+                    preload="auto"
+                    src={`/video/carousel${index + 1}.mp4`}
+                    />
+                    <div className="carousel-caption d-none d-md-block">
+                    <h5 className={styles['carousel-caption-title']}>Bienvenido {usuarioNombre}</h5>
+                    <p className={styles['carousel-caption-text']}>¿Qué haremos hoy?</p>
                     </div>
                 </div>
-                <button className={`carousel-control-prev ${styles['carousel-control-prev']}`} type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                    <span className={`carousel-control-prev-icon ${styles['carousel-control-icon']}`} aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button className={`carousel-control-next ${styles['carousel-control-next']}`} type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                    <span className={`carousel-control-next-icon ${styles['carousel-control-icon']}`} aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                </button>
-            </div>
+                ))}
+
+                </div>
+
+
             
             {/* Contenedor de las cartas */}
             <div className={styles.cardsContainer}>
@@ -104,8 +112,8 @@ const HomePage = () => {
                         </div>
                         <div className={`front ${styles.front}`}>
                             <div className={styles.img}>
-                                <div className={`${styles.circle}`} style={{ backgroundColor: '#dbdbdb' }}></div>
-                                <div className={`${styles.circle}`} style={{ backgroundColor: '#077587', left: '50px', top: '0px', width: '150px', height: '150px', animationDelay: '-800ms' }}></div>
+                                <div className={`${styles.circle}`} style={{ backgroundColor: '#fa6700' }}></div>
+                                <div className={`${styles.circle}`} style={{ backgroundColor: '#488558', left: '50px', top: '0px', width: '150px', height: '150px', animationDelay: '-800ms' }}></div>
                             </div>
                             <div className={styles["front-content"]}>
                                 <small className={`badge ${styles.badge}`}>Categoria</small>
@@ -139,8 +147,8 @@ const HomePage = () => {
                         </div>
                         <div className={`front ${styles.front}`}>
                             <div className={styles.img}>
-                                <div className={`${styles.circle}`} style={{ backgroundColor: '#dbdbdb' }}></div>
-                                <div className={`${styles.circle}`} style={{ backgroundColor: '#077587', left: '50px', top: '0px', width: '150px', height: '150px', animationDelay: '-800ms' }}></div>
+                                <div className={`${styles.circle}`} style={{ backgroundColor: '#fa6700' }}></div>
+                                <div className={`${styles.circle}`} style={{ backgroundColor: '#488558', left: '50px', top: '0px', width: '150px', height: '150px', animationDelay: '-800ms' }}></div>
                             </div>
                             <div className={styles["front-content"]}>
                                 <small className={`badge ${styles.badge}`}>Historial</small>
@@ -174,8 +182,8 @@ const HomePage = () => {
                         </div>
                         <div className={`front ${styles.front}`}>
                             <div className={styles.img}>
-                                <div className={`${styles.circle}`} style={{ backgroundColor: '#dbdbdb' }}></div>
-                                <div className={`${styles.circle}`} style={{ backgroundColor: '#077587', left: '50px', top: '0px', width: '150px', height: '150px', animationDelay: '-800ms' }}></div>
+                                <div className={`${styles.circle}`} style={{ backgroundColor: '#fa6700' }}></div>
+                                <div className={`${styles.circle}`} style={{ backgroundColor: '#488558', left: '50px', top: '0px', width: '150px', height: '150px', animationDelay: '-800ms' }}></div>
                             </div>
                             <div className={styles["front-content"]}>
                                 <small className={`badge ${styles.badge}`}>Estadisticas</small>
@@ -209,8 +217,8 @@ const HomePage = () => {
                         </div>
                         <div className={`front ${styles.front}`}>
                             <div className={styles.img}>
-                                <div className={`${styles.circle}`} style={{ backgroundColor: '#dbdbdb' }}></div>
-                                <div className={`${styles.circle}`} style={{ backgroundColor: '#077587', left: '50px', top: '0px', width: '150px', height: '150px', animationDelay: '-800ms' }}></div>
+                                <div className={`${styles.circle}`} style={{ backgroundColor: '#fa6700' }}></div>
+                                <div className={`${styles.circle}`} style={{ backgroundColor: '#488558', left: '50px', top: '0px', width: '150px', height: '150px', animationDelay: '-800ms' }}></div>
                             </div>
                             <div className={styles["front-content"]}>
                                 <small className={`badge ${styles.badge}`}>Notificaciones</small>
@@ -244,8 +252,8 @@ const HomePage = () => {
                         </div>
                         <div className={`front ${styles.front}`}>
                             <div className={styles.img}>
-                                <div className={`${styles.circle}`} style={{ backgroundColor: '#dbdbdb' }}></div>
-                                <div className={`${styles.circle}`} style={{ backgroundColor: '#077587', left: '50px', top: '0px', width: '150px', height: '150px', animationDelay: '-800ms' }}></div>
+                                <div className={`${styles.circle}`} style={{ backgroundColor: '#fa6700' }}></div>
+                                <div className={`${styles.circle}`} style={{ backgroundColor: '#488558', left: '50px', top: '0px', width: '150px', height: '150px', animationDelay: '-800ms' }}></div>
                             </div>
                             <div className={styles["front-content"]}>
                                 <small className={`badge ${styles.badge}`}>Ser Vendedor</small>
@@ -265,6 +273,14 @@ const HomePage = () => {
                     </div>
                 </a>
             </div>
+            {showSpline && (
+                <section className={styles.splineContainer}>
+                    <div className={styles.splineWrapper}>
+                        <Spline scene="https://draft.spline.design/tNx2ZwYmeAByoby5/scene.splinecode" />
+                    </div>
+                </section>
+            )}
+
         </div>
     );
 };

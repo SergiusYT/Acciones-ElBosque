@@ -1,7 +1,7 @@
 @charset "ISO-8859-1";
 
 body.home-page {
-	background: #07191c;
+	background: #0a0a0a;
 	background-size: cover;
 	font-family: Arial, sans-serif;
 	
@@ -10,51 +10,17 @@ body.home-page {
 
 /* DISEÑO CAROUSEL*/
 
-.carousel {
-    margin-top: 79px; /* Ajusta este valor según la altura de tu navbar */
-    width: 80%; /* Ajusta el ancho del carrusel */
-    height: auto; /* Cambia la altura del carrusel a 'auto' para que se ajuste dinámicamente al contenido */
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
+.carouselContainer {
+  margin-top: 50px; /* Ajusta la distancia como prefieras */
 }
 
 
 
 .carousel-img {
-    object-fit: contain; /* Esto asegura que las imágenes cubran el contenedor sin distorsionarse */
-    width: 100%; /* Permite que el ancho de las imágenes se ajuste automáticamente */
-    height: auto; /* Ajusta la altura automáticamente */
-}
-
-.carousel-control-prev, .carousel-control-next {
-    width: 5% !important; /* Ajusta el tamaño del área de las flechas de navegación */
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.carousel-control-prev {
-    left: -80px; /* Ajusta la posición horizontal según sea necesario */
-}
-
-.carousel-control-next {
-    right: -80px; /* Ajusta la posición horizontal según sea necesario */
-}
-
-.carousel-control-prev-icon, .carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    padding: 10px;
-}
-
-.carousel-control-icon {
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-    padding: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    object-fit: contain;
+    background-color: black; /* Hace que el video cubra sin deformarse */
+    width: 100%;
+    height: 100%; /* Ocupa 100% del contenedor del carrusel */
 }
 
 
@@ -133,7 +99,7 @@ body.home-page {
   display: block;
   width: 190px;
   height: 160%;
-  background: linear-gradient(90deg, transparent, #138a9e, #138a9e, #138a9e, #138a9e, transparent);
+  background: linear-gradient(90deg, transparent, #fa6700, #fa6700, #fa6700, #fa6700, transparent);
   animation: rotation_481 5000ms infinite linear;
 }
 
@@ -221,7 +187,7 @@ body.home-page {
   width: 90px;
   height: 90px;
   border-radius: 50%;
-  background-color: #ffbb66;
+  background-color: #ceac12;
   position: relative;
   filter: blur(15px);
   animation: floating 2600ms infinite linear;
@@ -243,3 +209,23 @@ body.home-page {
   }
 }
 
+/* DISEÑO DEL MODELO 3D*/
+
+.splineContainer {
+    width: 100%;
+    padding: 2rem 0;
+    background: linear-gradient(to bottom, #0f2027, #488558, #569d69); /* Fondo bonito */
+    display: flex;
+    justify-content: left;
+    margin-top: 80px;
+    padding-left: 2rem;
+}
+
+.splineWrapper {
+    width: 100%;
+    max-width: 800px;
+    height: 550px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
