@@ -3,6 +3,7 @@ package co.edu.unbosque.service.api;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import co.edu.unbosque.model.AssetDTO;
 import co.edu.unbosque.model.BarDTO;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +18,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Iterator;
+
 
 @Service
 public class AlpacaService {
@@ -38,7 +43,7 @@ public class AlpacaService {
     private final String baseUrl = "https://paper-api.alpaca.markets";
 
 
-private final String brokerBaseUrl = "https://broker-api.sandbox.alpaca.markets";
+    private final String brokerBaseUrl = "https://broker-api.sandbox.alpaca.markets";
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper mapper = new ObjectMapper();
@@ -49,6 +54,79 @@ private final String brokerBaseUrl = "https://broker-api.sandbox.alpaca.markets"
         headers.set("APCA-API-SECRET-KEY", apiSecret);
         return headers;
     }
+
+public List<AssetDTO> getAllAssets() throws Exception {
+    String assetsUrl = "https://paper-api.alpaca.markets/v2/assets";
+    HttpEntity<Void> entity = new HttpEntity<>(buildHeaders());
+    ResponseEntity<String> assetsResponse = restTemplate.exchange(assetsUrl, HttpMethod.GET, entity, String.class);
+
+    JsonNode assetsArray = mapper.readTree(assetsResponse.getBody());
+
+    List<String> symbols = new ArrayList<>();
+    Map<String, AssetDTO> assetInfoMap = new HashMap<>();
+    for (JsonNode asset : assetsArray) {
+        if ("active".equals(asset.get("status").asText()) &&
+            asset.get("tradable").asBoolean() &&
+            "us_equity".equalsIgnoreCase(asset.get("class").asText())) {  // <--- ESTE FILTRO ES EL QUE TRAE UNICAMENTE ACCIONES
+
+            String symbol = asset.get("symbol").asText();
+            symbols.add(symbol);
+
+            AssetDTO dto = new AssetDTO();
+            dto.setSymbol(symbol);
+            dto.setName(asset.get("name").asText());
+            dto.setExchange(asset.get("exchange").asText());
+            assetInfoMap.put(symbol, dto);
+        }
+    }
+
+
+    if (symbols.isEmpty()) {
+        System.out.println("No se encontraron activos válidos.");
+        return Collections.emptyList();
+    }
+
+    // Fetch snapshots de los símbolos recolectados
+    String symbolsParam = String.join(",", symbols);
+    String snapshotsUrl = "https://data.alpaca.markets/v2/stocks/snapshots?symbols=" + symbolsParam;
+
+    ResponseEntity<String> snapshotsResponse = restTemplate.exchange(snapshotsUrl, HttpMethod.GET, entity, String.class);
+    JsonNode rootNode = mapper.readTree(snapshotsResponse.getBody());
+
+    if (rootNode != null && rootNode.size() > 0) {
+        Iterator<String> fieldNames = rootNode.fieldNames();
+        while (fieldNames.hasNext()) {
+            String symbol = fieldNames.next();
+            JsonNode snapshot = rootNode.get(symbol);
+
+            if (snapshot != null && snapshot.has("latestTrade") && snapshot.has("prevDailyBar") && snapshot.has("dailyBar")) {
+                double lastPrice = snapshot.get("latestTrade").get("p").asDouble();
+                double prevClose = snapshot.get("prevDailyBar").get("c").asDouble();
+                long volume = snapshot.get("dailyBar").get("v").asLong();
+
+                double change = lastPrice - prevClose;
+                double changePercent = (change / prevClose) * 100.0;
+
+                AssetDTO dto = assetInfoMap.get(symbol);
+                if (dto != null) {
+                    dto.setLastPrice(lastPrice);
+                    dto.setChange(change);
+                    dto.setChangePercent(changePercent);
+                    dto.setVolume(volume);
+                }
+            } else {
+                System.out.println("Info: Datos de snapshot no disponibles para " + symbol + ", posiblemente sin actividad reciente.");
+            }
+        }
+    } else {
+        System.out.println("Advertencia: respuesta vacía de snapshots o JSON inválido.");
+    }
+
+    return new ArrayList<>(assetInfoMap.values());
+}
+
+
+
 
 
 

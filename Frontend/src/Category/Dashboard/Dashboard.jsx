@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { createChart } from 'lightweight-charts';
 import Header from '../../Components/Header';
@@ -12,7 +12,7 @@ const StockChart = ({ symbol="AAPL" }) => {
   const seriesRef = useRef();
   const intervalRef = useRef();
   const buttonsContainerRef = useRef();
-let lastBarTime = null;
+  let lastBarTime = null;
 
 
       useEffect(() => {
@@ -24,6 +24,30 @@ let lastBarTime = null;
               document.body.classList.remove(styles["dashboard-page"]);
           };
       }, []);
+
+      const [assets, setAssets] = useState([]);
+      const [isLoading, setIsLoading] = useState(true);
+      const [error, setError] = useState(null);
+      const [selectedSymbol, setSelectedSymbol] = useState('');
+
+      useEffect(() => {
+        const fetchAssets = async () => {
+          try {
+            const response = await axios.get('http://localhost:8080/AccionesElBosque/api/alpaca/activos');
+            setAssets(response.data);
+          } catch (err) {
+            console.error('Error al obtener activos:', err);
+            setError('No se pudieron cargar los activos.');
+          } finally {
+            setIsLoading(false);
+          }
+        };
+
+        fetchAssets();
+      }, []);
+
+
+
 
   useEffect(() => {
     // Crear gráfico
@@ -103,8 +127,9 @@ const fetchInitialData = async () => {
   }
 };
 
-
   fetchInitialData();
+
+  
 
   return () => {
     clearInterval(intervalRef.current);
@@ -164,6 +189,56 @@ return (
           </div>
         </div>
       </div>
+
+        <div className={styles['assets-container']}>
+          <h2 className={styles['assets-title']}>Lista de Activos</h2>
+          {isLoading ? (
+            <div className={styles['loading-text']}>Cargando activos...</div>
+          ) : error ? (
+            <div className={styles['error-text']}>{error}</div>
+          ) : (
+            <table className={styles['assets-table']}>
+              <thead>
+                <tr>
+                  <th>Símbolo</th>
+                  <th>Nombre</th>
+                  <th>Último Precio</th>
+                  <th>Cambio</th>
+                  <th>% Cambio</th>
+                  <th>Volumen</th>
+                </tr>
+              </thead>
+              <tbody>
+                {assets.map((asset, index) => {
+                  const isPositive = asset.change >= 0;
+                  const isSelected = asset.symbol === selectedSymbol;
+                  return (
+                    <tr
+                      key={index}
+                      className={`${isSelected ? styles['selected-row'] : ''}`}
+                      onClick={() => setSelectedSymbol(asset.symbol)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <td>{asset.symbol}</td>
+                      <td>{asset.name}</td>
+                      <td>${asset.lastPrice.toFixed(2)}</td>
+                      <td style={{ color: isPositive ? 'limegreen' : 'red' }}>
+                        {isPositive ? '+' : ''}{asset.change.toFixed(2)}
+                      </td>
+                      <td style={{ color: isPositive ? 'limegreen' : 'red' }}>
+                        {isPositive ? '+' : ''}{asset.changePercent.toFixed(2)}%
+                      </td>
+                      <td>{asset.volume.toLocaleString()}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
+        </div>
+
+
+
     </div>
 
   </div>

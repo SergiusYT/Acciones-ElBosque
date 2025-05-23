@@ -406,3 +406,51 @@ body.dashboard-page {
   max-width: 941px;
 }
 
+
+
+
+
+
+
+
+.assets-container {
+  margin-top: 20px;
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 8px;
+  color: white;
+}
+
+.assets-title {
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: #ccc;
+}
+
+.assets-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.assets-table th,
+.assets-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+.assets-table tr:hover {
+  background-color: #2a2a2a;
+}
+
+.selected-row {
+  background-color: #003366 !important;
+  color: #a0d7ff;
+}
+
+.loading-text,
+.error-text {
+  color: #aaa;
+  font-size: 14px;
+}

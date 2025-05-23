@@ -38,6 +38,19 @@ public class AlpacaController {
         }
     }
 
+
+    @GetMapping("/activos")
+    public ResponseEntity<?> getTodosLosActivos() {
+        try {
+            List<AssetDTO> activos = alpacaService.getAllAssets();
+            return ResponseEntity.ok(activos);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Map.of("error", e.getMessage()));
+        }
+    }
+
+
     @PostMapping("/orden")
     public JsonNode realizarOrden(@RequestParam String symbol,
                                    @RequestParam int qty,

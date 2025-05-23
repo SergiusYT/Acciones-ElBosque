@@ -3,4 +3,8 @@
 
 ----- alpaca --------
 
-http://localhost:8080/AccionesElBosque/api/alpaca/bars/AAPL
+http://localhost:8080/AccionesElBosque/api/alpaca/barsMinute/${symbol}
+
+http://localhost:8080/AccionesElBosque/api/alpaca/activos
+
+http://localhost:8080/AccionesElBosque/api/alpaca/cuentas
