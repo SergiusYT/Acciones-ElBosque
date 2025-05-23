@@ -1,0 +1,6 @@
+
+
+
+----- alpaca --------
+
+http://localhost:8080/AccionesElBosque/api/alpaca/bars/AAPL

@@ -2,13 +2,22 @@ package co.edu.unbosque.service.api;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import co.edu.unbosque.model.BarDTO;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class AlpacaService {
@@ -83,4 +92,70 @@ private final String brokerBaseUrl = "https://broker-api.sandbox.alpaca.markets"
             baseUrl + "/v2/orders", HttpMethod.POST, entity, String.class);
         return mapper.readTree(response.getBody());
     }
+
+
+public List<BarDTO> getBarsForSymbolMinute(String symbol) throws Exception {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+    ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
+    ZonedDateTime startDateTime = now.toLocalDate().atStartOfDay(ZoneOffset.UTC);
+    ZonedDateTime endDateTime = now;
+
+    String barsUrl = "https://data.alpaca.markets/v2/stocks/" + symbol +
+            "/bars?timeframe=1Min&start=" + startDateTime.format(formatter) +
+            "&end=" + endDateTime.format(formatter) + "&feed=iex";
+
+    HttpEntity<Void> entity = new HttpEntity<>(buildHeaders());
+
+    ResponseEntity<String> barsResponse = restTemplate.exchange(barsUrl, HttpMethod.GET, entity, String.class);
+    JsonNode rootNode = mapper.readTree(barsResponse.getBody());
+
+    List<BarDTO> barsList = new ArrayList<>();
+    if (rootNode != null && rootNode.has("bars")) {
+        for (JsonNode bar : rootNode.get("bars")) {
+            BarDTO dto = new BarDTO();
+            dto.setT(bar.get("t").asText());
+            dto.setO(bar.get("o").asDouble());
+            dto.setH(bar.get("h").asDouble());
+            dto.setL(bar.get("l").asDouble());
+            dto.setC(bar.get("c").asDouble());
+            dto.setV(bar.get("v").asLong());
+            barsList.add(dto);
+        }
+    }
+
+    return barsList;
+}
+
+
+public List<BarDTO> getBarsForSymbolDays(String symbol) throws Exception {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate endDate = LocalDate.now();
+    LocalDate startDate = endDate.minusMonths(3);
+
+    String barsUrl = "https://data.alpaca.markets/v2/stocks/" + symbol +
+            "/bars?timeframe=1Min&start=" + startDate.format(formatter) +
+            "&end=" + endDate.format(formatter) + "&feed=iex";
+
+    HttpEntity<Void> entity = new HttpEntity<>(buildHeaders());
+
+    ResponseEntity<String> barsResponse = restTemplate.exchange(barsUrl, HttpMethod.GET, entity, String.class);
+    JsonNode rootNode = mapper.readTree(barsResponse.getBody());
+
+    List<BarDTO> barsList = new ArrayList<>();
+    if (rootNode != null && rootNode.has("bars")) {
+        for (JsonNode bar : rootNode.get("bars")) {
+            BarDTO dto = new BarDTO();
+            dto.setT(bar.get("t").asText());
+            dto.setO(bar.get("o").asDouble());
+            dto.setH(bar.get("h").asDouble());
+            dto.setL(bar.get("l").asDouble());
+            dto.setC(bar.get("c").asDouble());
+            dto.setV(bar.get("v").asLong());
+            barsList.add(dto);
+        }
+    }
+
+    return barsList;
+}
+
 }
