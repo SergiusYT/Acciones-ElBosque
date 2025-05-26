@@ -1,0 +1,167 @@
+@charset "ISO-8859-1";
+
+
+body.login-page {
+	font-family: Arial, sans-serif;
+}
+
+
+.background-video {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -100;
+	object-fit: cover;
+	transform: scale(1); /* Usa 0.95 o 0.9 si se ve demasiado ampliado */
+	pointer-events: none;
+}
+
+.background-blur {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -99; /* Un nivel por encima del video */
+	backdrop-filter: blur(3px);
+	background-color: rgba(0, 0, 0, 0.2); /* Oscurece un poco */
+}
+
+  
+
+.image-container {
+	position: relative;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 20px;
+	z-index: 1;
+}
+
+.image-container::before {
+	content: "";
+	position: absolute;
+	top: 100px;
+	left: 49.5%;
+	transform: translateX(-50%);
+	width: 200px;
+	height: 150px;
+	background: rgba(0, 0, 0, 0.4); /* Fondo translúcido oscuro */
+	border-radius: 15px;
+	z-index: -1; /* Detrás del logo */
+	filter: blur(2px); /* Suaviza el fondo */
+}
+
+.image-container img {
+	max-width: 17%; /* Reduce el valor a 25% o el tamaño que prefieras */
+	height: auto;
+	border-radius: 10px;
+	position: relative;
+	top: 40px; /* Mueve la imagen hacia arriba */
+	filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.6));
+}
+
+.login-box {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	padding: 40px;
+	transform: translate(-50%, -50%);
+	background: rgba(24, 20, 20, 0.987);
+	box-sizing: border-box;
+	box-shadow: 0 15px 25px rgba(0,0,0,.6);
+	border-radius: 10px;
+	opacity: 0.9;
+}
+
+.login-box .user-box {
+	position: relative;
+}
+
+.login-box .user-box input {
+	width: 100%;
+	padding: 10px 0;
+	font-size: 16px;
+	color: #85ce99;
+	margin-bottom: 30px;
+	border: none;
+	border-bottom: 1px solid #85ce99;
+	outline: none;
+	background: transparent;
+}
+
+.login-box .user-box label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 10px 0;
+	font-size: 16px;
+	color: #fff;
+	pointer-events: none;
+	transition: .5s;
+}
+
+.login-box .user-box input:focus ~ label,
+.login-box .user-box input:valid ~ label {
+	top: -20px;
+	left: 0;
+	color: #bdb8b8;
+	font-size: 12px;
+}
+
+.login-box form a {
+	position: relative;
+	display: inline-block;
+	padding: 10px 20px;
+	color: #ffffff;
+	font-size: 16px;
+	text-decoration: none;
+	text-transform: uppercase;
+	overflow: hidden;
+	transition: .5s;
+	margin-top: 40px;
+	letter-spacing: 4px
+}
+
+.button-container{
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 40px;
+}
+
+.login-box a:hover {
+	background: #fa6700;
+	color: #488558;
+	border-radius: 5px;
+	box-shadow: 0 0 5px #fa6700,
+				0 0 25px #fa6700,
+				0 0 50px #fa6700,
+				0 0 100px #fa6700;
+}
+
+.login-box a span {
+	position: absolute;
+	display: block;
+}
+
+@keyframes btn-anim1 {
+	0% {
+		left: -100%;
+	}
+
+	50%,100% {
+		left: 100%;
+	}
+}
+
+.login-box a span:nth-child(1) {
+	bottom: 2px;
+	left: -100%;
+	width: 100%;
+	height: 2px;
+	background: linear-gradient(90deg, transparent, #fa6700);
+	animation: btn-anim1 2s linear infinite;
+}
