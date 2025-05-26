@@ -1,0 +1,17 @@
+<configuration>
+    <appender name="SPLUNK" class="com.splunk.logging.HttpEventCollectorLogbackAppender">
+        <url>https://localhost:8088/</url>
+        <token>95d19154-9845-4212-8c6c-02c5c7207be5</token>
+        <source>Accioneselbosqueapp</source>
+        <sourcetype>_json</sourcetype>
+        <index>main</index>
+        <disableCertificateValidation>true</disableCertificateValidation> <!-- solo para pruebas -->
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="SPLUNK"/>
+    </root>
+</configuration>
